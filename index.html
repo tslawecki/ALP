@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<style>
+    .city {display:none;}
+</style>
+<body>
+
+<div class="w3-container">
+    <img style="position:absolute; clip:rect(0px,200px,123px,0px) max-width:250px; max-height:61px" src="http://portal.glos.us/img/glos_logo.png">
+    <br>
+    <br>
+    <br>
+
+    <h2>45176: Cleveland Intake Crib</h2>
+    <p>Buoy Location: Lake Erie offshore of Cleveland, Ohio.</p>
+
+    <a href=""
+
+    <ul class="w3-navbar w3-black">
+        <li><a href="javascript:void(0)" class="tablink" onclick="openCity(event, 'Observations');">Observations</a></li>
+        <li><a href="javascript:void(0)" class="tablink" onclick="openCity(event, 'Paris');">Forecasts</a></li>
+        <li><a href="javascript:void(0)" class="tablink" onclick="openCity(event, 'Tokyo');">Map, Images and Credits</a></li>
+    </ul>
+
+    <div id="Observations" class="w3-container w3-border city">
+        <table class="w3-table w3-striped w3-bordered" cellspacing="0">
+            <h5>10/31/2016 17:40:00 STN<h5>
+                <tr>
+                    <td align=left>Wind Speed
+                    <td style="padding:8px 0px"><div align=right>3</div>
+                    <td style="padding:8px 0px"><div align=left>.2 knots</div>
+                <tr>
+                    <td align=left>Wind Gust Speed
+                    <td style="padding:8px 0px"><div align=right>4</div>
+                    <td style="padding:8px 0px"><div align=left>.9 knots</div>
+
+                <tr>
+                    <td align=left>Wind Direction
+                    <td style="padding:8px 0px"><div align=right>194</div>
+                    <td style="padding:8px 0px"><div align=left>.9&deg(SSW)</div>
+                <tr>
+                    <td align=left>Air Temperature
+                    <td style="padding:8px 0px"><div align=right>52</div>
+                    <td style="padding:8px 0px"><div align=left>&degF</div>
+                <tr>
+                    <td align=left>Relative Humidity
+                    <td style="padding:8px 0px"><div align=right>53</div>
+                    <td style="padding:8px 0px"><div align=left>.62%</div>
+                <tr>
+                    <td align=left>Station Air Temperature
+                    <td style="padding:8px 0px"><div align=right>1001</div>
+                <tr>
+                    <td align=left>Solar Radiation
+                    <td style="padding:8px 0px"><div align=right>0</div>
+                    <td style="padding:8px 0px"><div align=left>&nbspW m<sup>-2</sup></div>
+                </table>
+    </div>
+
+    <div id="Paris" class="w3-container w3-border city">
+        <h2>Paris</h2>
+        <p>Paris is the capital of France.</p>
+    </div>
+
+    <div id="Tokyo" class="w3-container w3-border city">
+        <p>The Cleveland Intake Crib buoy (Station 45176) is located in Lake Erie offshore of Cleveland, Ohio near the city's water intake crib. The buoy is owned and maintained by LimnoTech, which receives funding from the City of Cleveland managed by the Great Lakes Observing System. It monitors atmospheric conditions, waves, water temperature, surface water quality, and bottom water quality including dissolved oxygen.</p>
+    </div>
+
+
+</div>
+
+
+
+
+<script>
+    function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " w3-red";
+    }
+</script>
+
+<div class="w3-container">
+    <br>
+    <table>
+        <tr>
+            <td><img src=http://greatlakesbuoys.org/images/city-of-cleveland-logo-1-e1407262963392.jpg style="width:100%;max-width:120px">
+            <td><img src=http://greatlakesbuoys.org/images/limnotech_logo.jpg style="width:100%;max-width:200px">
+    </table>
+</div>
+
+</body>
+</html>
