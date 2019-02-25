@@ -1,103 +1,234 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<style>
-    .city {display:none;}
-</style>
+
+<head>
+    <title>Great Lakes Buoys</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-light-blue.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/stations.js"></script>
+    <script src="js/highcharts.js"></script>
+	<!--<script src="js/highstock.js"></script>-->
+	<script src="js/moduleExporting.js"></script>
+	<script src="js/export-csv.js"></script>
+  	<script src="js/highchartgraph.js"></script>
+  	<script src="js/moduleData.js"></script>
+</head>
+
 <body>
 
-<div class="w3-container">
-    <img style="position:absolute; clip:rect(0px,200px,123px,0px) max-width:250px; max-height:61px" src="http://portal.glos.us/img/glos_logo.png">
-    <br>
-    <br>
-    <br>
+    <nav class="w3-sidenav w3-white w3-collapse w3-card-2 w3-animate-right w3-top" style="width:135px;right:0;z-index:2;" id="mySidenav">
+        <a href="javascript:void(0)" onclick="w3_close(); return false;"
+        class="w3-closenav w3-xlarge w3-hide-large w3-right-align">x</a>
+        <div class="w3-container w3-padding-tiny w3-dark-grey">
+            <p id="navHeader" class="w3-center">Buoy List</p>
+        </div>
+        <div class="w3-accordion" id="Lake Erie">
+            <a onclick="myAccFunc(); return false;" href="#">
+                Lake Erie <i class="fa fa-caret-down"></i>
+            </a>
+            <div id="ErieAcc" class="w3-accordion-content w3-white w3-card-4">
+            </div>
+        </div>
+        <div class="w3-accordion" id="Lake Michigan">
+            <a onclick="myAccFunc2(); return false;" href="#">
+                Lake Michigan<i class="fa fa-caret-down"></i>
+            </a>
+            <div id="MichiganAcc" class="w3-accordion-content w3-white w3-card-4">
+            </div>
+        </div>
+        <div class="w3-accordion" id="Lake Superior">
+            <a onclick="myAccFunc3(); return false;" href="#">
+                Lake Superior<i class="fa fa-caret-down"></i>
+            </a>
+            <div id="SuperiorAcc" class="w3-accordion-content w3-white w3-card-4">
+            </div>
+        </div>
+        <div class="w3-accordion" id="Lake Huron">
+            <a onclick="myAccFunc4(); return false;" href="#">
+                Lake Huron<i class="fa fa-caret-down"></i>
+            </a>
+            <div id="HuronAcc" class="w3-accordion-content w3-white w3-card-4">
+            </div>
+        </div>
 
-    <h2>45176: Cleveland Intake Crib</h2>
-    <p>Buoy Location: Lake Erie offshore of Cleveland, Ohio.</p>
+    </nav>
 
-    <a href=""
+    <div class="w3-main" style="margin-right:100px">
 
-    <ul class="w3-navbar w3-black">
-        <li><a href="javascript:void(0)" class="tablink" onclick="openCity(event, 'Observations');">Observations</a></li>
-        <li><a href="javascript:void(0)" class="tablink" onclick="openCity(event, 'Paris');">Forecasts</a></li>
-        <li><a href="javascript:void(0)" class="tablink" onclick="openCity(event, 'Tokyo');">Map, Images and Credits</a></li>
-    </ul>
+        <header class="w3-container w3-top w3-white">
 
-    <div id="Observations" class="w3-container w3-border city">
-        <table class="w3-table w3-striped w3-bordered" cellspacing="0">
-            <h5>10/31/2016 17:40:00 STN<h5>
-                <tr>
-                    <td align=left>Wind Speed
-                    <td style="padding:8px 0px"><div align=right>3</div>
-                    <td style="padding:8px 0px"><div align=left>.2 knots</div>
-                <tr>
-                    <td align=left>Wind Gust Speed
-                    <td style="padding:8px 0px"><div align=right>4</div>
-                    <td style="padding:8px 0px"><div align=left>.9 knots</div>
+        <div class="w3-display-container" style="height: 40px;">
+            <div class="w3-display-topleft">
+               <a href="http://www.glos.us/" target="_blank">
+                <img style="clip:rect(0px,200px,123px,0px); max-width:250px; max-height:61px" src="http://portal.glos.us/img/glos_logo.png">
+               </a>
+            </div>
 
+            <div class="w3-display-topright">
+                <span class="w3-opennav w3-xlarge w3-hide-large w3-right" onclick="w3_open()">&#9776;</span>
+            </div>
+            <!--<div class="w3-display-topmiddle">
+                <a href="http://greatlakebuoys.org" target="_blank">
+                <img style="clip:rect(0px,200px,123px,0px); max-width:250px; max-height:45px" src="img/GLB.png">
+                </a>
+            </div>-->
+        </div>
+        <div id="staticHeader">
+            <p id="stationID" class="w3-center">45176: Cleveland Intake Crib</p>
+            <h5 class="w3-center" id="stationTime">02/03/2016 13:00:00 STN</h5><!--Script to check if time is within 1 hour of current time-->
+        </div>
+            <!--Add Sign in/sign up/register/adopt-a-buoy slash-->
+
+        </header>
+
+        <section id="main" class="w3-container" style="margin-top:140px">
+        
+            <div class="w3-center">
+            <!--Needs to be dynamic logos-->
+            <a href="http://www.limno.com//" target="_blank">
+                <img style="clip:rect(0px,200px,123px,0px); max-width:250px; max-height:40px" src="http://greatlakesbuoys.org/images/limnotech_logo.jpg">
+            </a>
+        </div>
+
+        <!--<h5 class="w3-center">10/31/2016 17:40:00 STN</h5>-->
+            <table id="realtime" class="w3-table w3-striped w3-bordered w3-small" style="max-width:500px" align="center" cellspacing="0">
+                <tr id="WindSpd">
+                    <td width="15px"><div align=right><img onclick="highchartGrab($(this).closest('tr').attr('id')); document.getElementById('id01').style.display = 'block'" style="cursor: pointer;" src="img/GraphIcon.gif" /></div></td>
+                    <td align=left>Wind Speed</td>
+                    <td style="padding:8px 0px"><div align=right>3</div></td>
+                    <td style="padding:8px 0px"><div align=left>.2 knots</div></td>
+                </tr>
                 <tr>
-                    <td align=left>Wind Direction
-                    <td style="padding:8px 0px"><div align=right>194</div>
-                    <td style="padding:8px 0px"><div align=left>.9&deg(SSW)</div>
+                    <td width="15px"><div align=right><img onclick="highchartGrab($(this).closest('tr').attr('id')); document.getElementById('id01').style.display = 'block'" style="cursor: pointer;" src="img/GraphIcon.gif" /></div></td>
+                    <td align=left>Wind Gust Speed</td>
+                    <td style="padding:8px 0px"><div align=right>4</div></td>
+                    <td style="padding:8px 0px"><div align=left>.9 knots</div></td>
+                </tr>
+                <tr id="WindDir">
+                    <td width="15px"><div align=right><img onclick="highchartGrab($(this).closest('tr').attr('id')); document.getElementById('id01').style.display = 'block'" style="cursor: pointer;" src="img/GraphIcon.gif" /></div></td>
+                    <td align=left>Wind Direction</td>
+                    <td style="padding:8px 0px"><div align=right>194</div></td>
+                    <td style="padding:8px 0px"><div align=left>.9&deg(SSW)</div></td>
+                </tr>
+                <tr id="AirTemp">
+                    <td width="15px"><div align=right><img onclick="highchartGrab($(this).closest('tr').attr('id')); document.getElementById('id01').style.display = 'block'" style="cursor: pointer;" src="img/GraphIcon.gif" /></div></td>
+                    <td align=left>Air Temperature</td>
+                    <td style="padding:8px 0px"><div align=right>52</div></td>
+                    <td style="padding:8px 0px"><div align=left>.0 &degF</div></td>
+                </tr>
                 <tr>
-                    <td align=left>Air Temperature
-                    <td style="padding:8px 0px"><div align=right>52</div>
-                    <td style="padding:8px 0px"><div align=left>&degF</div>
+                    <td width="15px"><div align=right><img onclick="highchartGrab($(this).closest('tr').attr('id')); document.getElementById('id01').style.display = 'block'" style="cursor: pointer;" src="img/GraphIcon.gif" /></div></td>
+                    <td align=left>Relative Humidity</td>
+                    <td style="padding:8px 0px"><div align=right>53</div></td>
+                    <td style="padding:8px 0px"><div align=left>.62 %</div></td>
+                </tr>
+                <tr id="Pressure">
+                    <td width="15px"><div align=right><img onclick="highchartGrab($(this).closest('tr').attr('id')); document.getElementById('id01').style.display = 'block'" style="cursor: pointer;" src="img/GraphIcon.gif" /></div></td>
+                    <td align=left>Air Pressure</td>
+                    <td style="padding:8px 0px"><div align=right>1001</div></td>
+                    <td style="padding:8px 0px"><div align=left>.0 mb</div></td>
+                </tr>
                 <tr>
-                    <td align=left>Relative Humidity
-                    <td style="padding:8px 0px"><div align=right>53</div>
-                    <td style="padding:8px 0px"><div align=left>.62%</div>
-                <tr>
-                    <td align=left>Station Air Temperature
-                    <td style="padding:8px 0px"><div align=right>1001</div>
-                <tr>
-                    <td align=left>Solar Radiation
-                    <td style="padding:8px 0px"><div align=right>0</div>
-                    <td style="padding:8px 0px"><div align=left>&nbspW m<sup>-2</sup></div>
-                </table>
+                    <td width="15px"><div align=right><img onclick="highchartGrab($(this).closest('tr').attr('id')); document.getElementById('id01').style.display = 'block'" style="cursor: pointer;" src="img/GraphIcon.gif" /></div></td>
+                    <td align=left>Solar Radiation</td>
+                    <td style="padding:8px 0px"><div align=right>0</div></td>
+                    <td style="padding:8px 0px"><div align=left>.0&nbspW m<sup>-2</sup></div></td>
+                </tr>
+            </table>
+            <div id="id01" class="w3-modal">
+                <div class="w3-modal-content w3-card-8">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="w3-closebtn">&times;</span>
+                    <div id="container" class="w3-container" style="min-width: 310px; height: 350px; margin: 0 auto">
+                        <!--<img style="width:100%;max-width:500px" src="img/past7days.jpg" />-->
+                    </div>
+                </div>
+            </div>
+        <br />
+
+        <h5 class="w3-center">Buoy Cam</h5>
+        <div id="BuoyCam" class="w3-center">
+            <img style="width:100%;max-width:500px" src="http://limnotechdata.com/stations/zp-core/i.php?a=Cleveland/Archive/Images/Oct/06&i=ClevelandImageOct062016_+9hh08mm02ss.jpg&s=595&q=85&wmk=!&check=b08215c4381e5db7b925dff85bb5e029edfeb2d4" />
+        </div>
+
+        <br />
+        <br />
+
+        <h5 class="w3-panal w3-center w3-border-top">Thermistor String</h5>
+        <div id="Thermistor" class="w3-center">
+            <img style="width:100%;max-width:500px" src="img/tempstring.jpg" />
+        </div>
+
+        <br />
+        
+        <h5 class="w3-panal w3-center w3-border-top">NWS Marine Forecast</h5>
+        <div id="MarineForecast" style="overflow: hidden; max-width: 800px;">
+            <iframe scrolling="no" src="http://marine.weather.gov/MapClick.php?lon=-81.7547946315749&lat=41.548930569957946" style="border: 0px none; margin-left: -15px; height: 560px; margin-top: -275px; width: 860px;">
+            </iframe>
+        </div>
+
+        <br />
+        <h5 class="w3-panal w3-center w3-border-top">Buoy Location</h5>
+
+        <style type="text/css">
+            div#map_canvas { margin: 0 auto 0 auto; }
+        </style>
+        <div id="map_canvas" style="width:100%;max-width:400px;height:400px">
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhlUyFNacPYsUz4dZZUmf7lu7SrwkLRIo&callback=initialize"></script>
+        </div>
+        <br />
+
+        <h5 class="w3-panal w3-center w3-border-top">Additional Buoy Information</h5>
+
+        <p class="w3-container">
+            This buoy is located offshore of Cleveland near the water intake crib. Funding for the station is provided by the City of Cleveland, funds are managed by the Great Lakes Observing System, and the station is owned and maintained by LimnoTech. The station monitors atmospheric conditions, waves, water temperature, surface water quality, and bottom water quality including dissolved oxygen.
+        </p>
+
+        <table class="w3-table w3-bordered w3-centered w3-small" cellspacing="0">
+            <tr>
+                <td align=left>41.55016</td>
+                <td> -81.76528 </td>
+                <td>Decimal Degrees [DDD.DDDDD]</td>
+            </tr>
+            <tr>
+                <td align=left>41 33.0096</td>
+                <td> -81 45.9168 </td>
+                <td>Degrees, Decimal Minutes [DDD MM.MMMM]</td>
+            </tr>
+            <tr>
+                <td align=left>41 33 0</td>
+                <td> -81 45 55 </td>
+                <td>Degrees, Minutes, Seconds [DDD MM SS]</td>
+            </tr>
+        </table>
+        </section>
+
+        <footer class="w3-container">
+        <br>
+        <table>
+            <tr>
+                <td>
+                    <a href="http://www.clevelandwater.com/" target="_blank">
+                    <img src=http://greatlakesbuoys.org/images/city-of-cleveland-logo-1-e1407262963392.jpg style="width:100%;max-width:120px"></td>
+                    </a>
+                </td>
+                <td>
+                    <a href="http://www.limno.com/" target="_blank">
+                    <img src=http://greatlakesbuoys.org/images/limnotech_logo.jpg style="width:100%;max-width:200px"></td>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </footer>
+
     </div>
 
-    <div id="Paris" class="w3-container w3-border city">
-        <h2>Paris</h2>
-        <p>Paris is the capital of France.</p>
-    </div>
+    <script>
 
-    <div id="Tokyo" class="w3-container w3-border city">
-        <p>The Cleveland Intake Crib buoy (Station 45176) is located in Lake Erie offshore of Cleveland, Ohio near the city's water intake crib. The buoy is owned and maintained by LimnoTech, which receives funding from the City of Cleveland managed by the Great Lakes Observing System. It monitors atmospheric conditions, waves, water temperature, surface water quality, and bottom water quality including dissolved oxygen.</p>
-    </div>
-
-
-</div>
-
-
-
-
-<script>
-    function openCity(evt, cityName) {
-        var i, x, tablinks;
-        x = document.getElementsByClassName("city");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < x.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " w3-red";
-    }
-</script>
-
-<div class="w3-container">
-    <br>
-    <table>
-        <tr>
-            <td><img src=http://greatlakesbuoys.org/images/city-of-cleveland-logo-1-e1407262963392.jpg style="width:100%;max-width:120px">
-            <td><img src=http://greatlakesbuoys.org/images/limnotech_logo.jpg style="width:100%;max-width:200px">
-    </table>
-</div>
+    </script>
 
 </body>
 </html>
